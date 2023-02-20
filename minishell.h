@@ -6,7 +6,7 @@
 /*   By: jperales <jperales@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 17:16:27 by jperales          #+#    #+#             */
-/*   Updated: 2023/02/20 19:30:43 by jperales         ###   ########.fr       */
+/*   Updated: 2023/02/20 19:33:44 by jperales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_general
 {
-	char	**env;
+	char	**minienv;
 	char    *user;
 	char    *path;
 	char    *home;

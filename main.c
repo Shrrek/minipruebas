@@ -6,7 +6,7 @@
 /*   By: jperales <jperales@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 17:29:00 by jperales          #+#    #+#             */
-/*   Updated: 2023/02/20 19:32:25 by jperales         ###   ########.fr       */
+/*   Updated: 2023/02/20 19:34:37 by jperales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int main(int argc, char **argv, char **env)
 	{
 		i++;
 	}
-	var.env = malloc(sizeof(char **));
+	var.minienv = malloc(sizeof(char **));
 	i = 0;
 	while (env[i])
 	{
-		var.env[i] = env[i];
-		printf("%s \n", var.env[i]);
+		var.minienv[i] = env[i];
+		printf("%s \n", var.minienv[i]);
 		i++;
 	}
 	return (0);
