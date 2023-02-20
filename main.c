@@ -6,7 +6,7 @@
 /*   By: jperales <jperales@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 17:29:00 by jperales          #+#    #+#             */
-/*   Updated: 2023/02/20 19:58:08 by jperales         ###   ########.fr       */
+/*   Updated: 2023/02/20 20:01:47 by jperales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ int main(int argc, char **argv, char **env)
 		i++;
 	}
 	var.miniuser = getenv("USER");
+	var.minipath = getenv("PATH");
+	var.minihome = getenv("HOME");
 	printf("El usuario actual es: %s \n", var.miniuser);
+	printf("La ruta actual es: %s \n", var.minipath);
+	printf("El Home actual es: %s \n", var.minihome);
 	return (0);
 }
