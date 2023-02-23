@@ -6,7 +6,7 @@
 /*   By: jperales <jperales@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:01:08 by jperales          #+#    #+#             */
-/*   Updated: 2023/02/23 18:34:05 by jperales         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:10:49 by jperales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,41 +54,51 @@ char	**ft_export_variable(char **env, char *new_var, t_mini *minishell)
 int	ft_parse_34(t_mini *minishell)
 {
 	int	i;
-	int	pos;
+	int	count;
 
-	pos = 0;
+	count = 0;
 	i = 0;
 	while (minishell->next_line[i])
 	{
-		if (minishell->next_line[i] = '34')
+		if (minishell->next_line[i] == 34)
 		{
-			pos = i;
-			while (minishell->next_line[++i] !='\0')
-			{
-				if (minishell->next_line[i] = '34')
-				{
-					return exito;
-				}
-				i++;
-			}
-			return fallo;
+			count++;
 		}
 		i++;
 	}
-	return fallo;
+	if (count %2 == 0)
+	{
+		return (1);
+	}
+	return (0);
 }
 
 void	ft_process_next_line(t_mini *minishell)
 {
-	if (minishell->next_line == echo)
-		jjkjsdjds
-	else if(jbshhhufse)
+	char	*dst;
+	if(ft_parse_34(minishell))
+	{
+		if (ft_strstr(minishell->next_line, "echo"))
+		{
+			dst =  &minishell->next_line[ft_strchr(minishell->next_line, ' ') + 1];
+			write (1, dst, ft_strlen(dst));
+			write (1, "\n", 1);
+		}
+		else if (ft_strstr(minishell->next_line, "env"))
+		{
+			ft_print2dstr(minishell->minienv);
+		}
+	}
+	else 
+		ft_process_error(ERROR_34, minishell);
+	
+/*	else if(jbshhhufse)
 		kjfkjsdhkj
 	else if (hjdsagjhsd)
 		jsdhh
 	otrafuncion(shgajshdgasdhk)
 	if (otrafuncion == -1 )
-		pipie
+		pipie*/
 }
 
 int main(int argc, char **argv, char **envp)
@@ -102,19 +112,20 @@ int main(int argc, char **argv, char **envp)
 	minishell.minienv = ft_2dstrdup((const char **)envp, &minishell);
 	
 	//printf("\n\nANTES DE HACER MOVIDAS - envp\n\n");
-	minishell.minienv = ft_export_variable(minishell.minienv, "USER=PRUEBA", &minishell);
-	printf("\n\nDESPUES DE MODIFICAR UNA VARIABLE - new_env\n\n");
-	ft_print2dstr(minishell.minienv);
+	//minishell.minienv = ft_export_variable(minishell.minienv, "USER=PRUEBA", &minishell);
+	//printf("\n\nDESPUES DE MODIFICAR UNA VARIABLE - new_env\n\n");
+	//ft_print2dstr(minishell.minienv);
 	
 	//ft_print2dstr(envp);
-	minishell.minienv = ft_export_variable(minishell.minienv, "VAR2=PRUEBA2", &minishell);
-	printf("\n\nDESPUES DE CREAR UNA VARIABLE - new_env1\n\n");
-	ft_print2dstr(minishell.minienv);
+	//minishell.minienv = ft_export_variable(minishell.minienv, "VAR2=PRUEBA2", &minishell);
+	//printf("\n\nDESPUES DE CREAR UNA VARIABLE - new_env1\n\n");
+	//ft_print2dstr(minishell.minienv);
 	while (1)
 	{
 		minishell.next_line = readline(">MiniTabaqueros ");
-		ft_process_next_line();
-		printf("linea = %s\n", minishell.next_line);
+		ft_process_next_line(&minishell);
+//		printf("linea = %s\n", minishell.next_line);
+//		printf("\n%d\n", ft_parse_34(&minishell));
 		free(minishell.next_line);
 	}
 	ft_free_2d_str(minishell.minienv);

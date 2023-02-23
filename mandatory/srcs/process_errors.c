@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_errors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jperales <jperales@student.42urduli>       +#+  +:+       +#+        */
+/*   By: jperales <jperales@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:01:32 by jperales          #+#    #+#             */
-/*   Updated: 2023/02/23 16:01:35 by jperales         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:15:13 by jperales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void	ft_process_error(int type, t_mini *minishell)
 		printf("Error.\nFailed to allocate memory.\n");
 	if (type == NULL_ERROR)
 		printf("Error.\nNULL pointer.\n");
+	if (type == ERROR_34)
+	{
+		printf("Error.\nDouble Quotes not exits.\n");
+	}
 	ft_general_free(minishell);
 	exit(-1);
 }

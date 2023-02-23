@@ -6,7 +6,7 @@
 /*   By: jperales <jperales@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:01:40 by jperales          #+#    #+#             */
-/*   Updated: 2023/02/23 16:12:20 by jperales         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:16:38 by jperales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,25 @@ int ft_strnstr(const char *str, const char *substr, size_t n)
 		}
 	}
 	return (-1);
+}
+char	*ft_strstr(const char *haystack, const char *needle)
+{
+	ssize_t	i;
+	ssize_t	j;
+	
+	i = -1;	
+	if (!needle || !haystack)	
+		return (NULL);
+	if (!*needle)
+		return ((char *)haystack);
+	while (haystack[++i])	
+	{		
+		j = 0;		
+		while (haystack[i + j] == needle[j])
+		{		
+			if (needle[j++ + 1] == '\0')
+				return ((char *)&haystack[i]);
+		}
+	}
+	return (NULL);
 }

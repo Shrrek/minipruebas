@@ -6,7 +6,7 @@
 /*   By: jperales <jperales@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:09:36 by sperez-p          #+#    #+#             */
-/*   Updated: 2023/02/23 16:36:40 by jperales         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:07:07 by jperales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
 # define MALLOC_ERROR 1
 # define NULL_ERROR 2
+# define ERROR_34 3
+
 
 typedef struct s_mini
 {
@@ -47,6 +50,7 @@ void    ft_print2dstr(char **str);
 /* SEARCH FUNCIONS */
 int		ft_strchr(const char *str, int c);
 int		ft_strnstr(const char *str, const char *substr, size_t n);
+char	*ft_strstr(const char *haystack, const char *needle);
 
 /* SIZE FUNCTIONS */
 size_t	ft_strlen(const char *str);
