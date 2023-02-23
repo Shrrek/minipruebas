@@ -6,7 +6,7 @@
 /*   By: jperales <jperales@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:09:36 by sperez-p          #+#    #+#             */
-/*   Updated: 2023/02/22 19:38:13 by jperales         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:36:40 by jperales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # define MALLOC_ERROR 1
 # define NULL_ERROR 2
@@ -23,11 +25,13 @@
 typedef struct s_mini
 {
 	char	**minienv;
+	char	*next_line;
 
 }t_mini;
 
 /* COPY FUNCTIONS */
 char	*ft_strdup(const char *str, t_mini *minishell);
+char	*ft_strdup_free(const char *str, t_mini *minishell, char *src);
 char	**ft_2dstrdup(const char **str, t_mini *minishell);
 
 /* ERROR FUNCTIONS */

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   search.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jperales <jperales@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/23 16:01:40 by jperales          #+#    #+#             */
+/*   Updated: 2023/02/23 16:12:20 by jperales         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 
 /*
@@ -33,6 +45,7 @@ int ft_strnstr(const char *str, const char *substr, size_t n)
 		return (-1);
 	if (!*substr)
 		return (-1);
+	printf("\n%s y %s\n", &str[n], &substr[n]);
 	while (str[++i] && n)
 	{
 		j = 0;
