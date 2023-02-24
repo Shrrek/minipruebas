@@ -103,8 +103,8 @@ void	ft_process_next_line(t_mini *minishell)
 		}
 		else if (ft_strstr(minishell->next_line, "export"))
 		{
-			i = 5;
-			//minishell->minienv = ft_export_variable(minishell->minienv, &minishell->next_line[i], minishell);
+			i = 6;
+			minishell->minienv = ft_export_variable(minishell->minienv, &minishell->next_line[i + 1], minishell);
 			ft_print2dstr_export(minishell->minienv);
 		}
 		
