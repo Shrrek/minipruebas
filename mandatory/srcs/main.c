@@ -82,8 +82,12 @@ void	ft_process_next_line(t_mini *minishell)
 	{
 		if (ft_strstr(minishell->next_line, "echo"))
 		{
-			dst =  &minishell->next_line[ft_strchr(minishell->next_line, ' ') + 1];
-			write (1, dst, ft_strlen(dst));
+			i = 4;
+			if (minishell->next_line[i] != '\0')
+			{
+				dst =  &minishell->next_line[ft_strchr(minishell->next_line, ' ') + 1];
+				write (1, dst, ft_strlen(dst));
+			}
 			write (1, "\n", 1);
 		}
 		else if (ft_strstr(minishell->next_line, "env"))
@@ -97,10 +101,16 @@ void	ft_process_next_line(t_mini *minishell)
 			}
 			ft_print2dstr(minishell->minienv);
 		}
-	}
+		else if (ft_strstr(minishell->next_line, "export"))
+		{
+			i = 5;
+			//minishell->minienv = ft_export_variable(minishell->minienv, &minishell->next_line[i], minishell);
+			ft_print2dstr_export(minishell->minienv);
+		}
+		
 	else 
 		ft_process_error(ERROR_34, minishell);
-	
+	}
 /*	else if(jbshhhufse)
 		kjfkjsdhkj
 	else if (hjdsagjhsd)
@@ -121,12 +131,10 @@ int main(int argc, char **argv, char **envp)
 		ft_process_error(ARGS_ERROR, &minishell);
 	//printf("\n\nDESPUES DE COPIAR\n\n");
 	minishell.minienv = ft_2dstrdup((const char **)envp, &minishell);
-	
 	//printf("\n\nANTES DE HACER MOVIDAS - envp\n\n");
 	//minishell.minienv = ft_export_variable(minishell.minienv, "USER=PRUEBA", &minishell);
 	//printf("\n\nDESPUES DE MODIFICAR UNA VARIABLE - new_env\n\n");
 	//ft_print2dstr(minishell.minienv);
-	
 	//ft_print2dstr(envp);
 	//minishell.minienv = ft_export_variable(minishell.minienv, "VAR2=PRUEBA2", &minishell);
 	//printf("\n\nDESPUES DE CREAR UNA VARIABLE - new_env1\n\n");

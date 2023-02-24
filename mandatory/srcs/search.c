@@ -45,7 +45,7 @@ int ft_strnstr(const char *str, const char *substr, size_t n)
 		return (-1);
 	if (!*substr)
 		return (-1);
-	printf("\n%s y %s\n", &str[n], &substr[n]);
+//	printf("\n%s y %s\n", &str[n], &substr[n]);
 	while (str[++i] && n)
 	{
 		j = 0;

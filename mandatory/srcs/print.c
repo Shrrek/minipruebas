@@ -26,3 +26,29 @@ void    ft_print2dstr(char **str)
 		}
 	}
 }
+
+void    ft_print2dstr_export(char **str)
+{
+	int i;
+	int	j;
+
+	i = 0;
+	while (str[i])
+	{
+		printf("declare -x ");
+		j = 0;
+		while (str[i][j])
+		{
+			if (str[i][j] == '=')
+			{
+				printf("%c", str[i][j]);
+				j++;
+				printf("\"");
+			}
+			printf("%c", str[i][j]);
+			j++;
+		}
+		i++;
+		printf("\"\n");
+	}
+}

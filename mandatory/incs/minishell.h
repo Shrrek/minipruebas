@@ -47,6 +47,7 @@ void	ft_general_free(t_mini *minishell);
 
 /* PRINT FUNCTIONS */
 void    ft_print2dstr(char **str);
+void    ft_print2dstr_export(char **str);
 
 /* SEARCH FUNCIONS */
 int		ft_strchr(const char *str, int c);
