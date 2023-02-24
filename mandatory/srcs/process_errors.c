@@ -19,9 +19,11 @@ void	ft_process_error(int type, t_mini *minishell)
 	if (type == NULL_ERROR)
 		printf("Error.\nNULL pointer.\n");
 	if (type == ERROR_34)
-	{
 		printf("Error.\nDouble Quotes not exits.\n");
-	}
+	if (type == ARGS_ERROR)
+		printf("Error.\nNo arguments please.\n");
+	if (type == ENV_ERROR)
+		printf("No such file or directory.\n");
 	ft_general_free(minishell);
 	exit(-1);
 }

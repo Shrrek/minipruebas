@@ -76,6 +76,8 @@ int	ft_parse_34(t_mini *minishell)
 void	ft_process_next_line(t_mini *minishell)
 {
 	char	*dst;
+	int		i;
+
 	if(ft_parse_34(minishell))
 	{
 		if (ft_strstr(minishell->next_line, "echo"))
@@ -86,6 +88,13 @@ void	ft_process_next_line(t_mini *minishell)
 		}
 		else if (ft_strstr(minishell->next_line, "env"))
 		{
+			i = 3;
+			while (minishell->next_line[i] != '\0')
+			{
+				if (minishell->next_line[i] != ' ')
+					ft_process_error(ENV_ERROR, minishell);
+				i++;
+			}
 			ft_print2dstr(minishell->minienv);
 		}
 	}
@@ -108,6 +117,8 @@ int main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	
+	if (argc > 1)
+		ft_process_error(ARGS_ERROR, &minishell);
 	//printf("\n\nDESPUES DE COPIAR\n\n");
 	minishell.minienv = ft_2dstrdup((const char **)envp, &minishell);
 	

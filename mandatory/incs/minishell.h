@@ -23,7 +23,8 @@
 # define MALLOC_ERROR 1
 # define NULL_ERROR 2
 # define ERROR_34 3
-
+# define ARGS_ERROR 4
+# define ENV_ERROR 5
 
 typedef struct s_mini
 {
