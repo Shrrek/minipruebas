@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
+# include <termios.h>
 
 # define MALLOC_ERROR 1
 # define NULL_ERROR 2
@@ -57,6 +59,12 @@ char	*ft_strstr(const char *haystack, const char *needle);
 /* SIZE FUNCTIONS */
 size_t	ft_strlen(const char *str);
 size_t  ft_2dstrlen(const char **str);
+
+/* SIGNALS */
+void	ft_signal_handler(int signal);
+
+/* READLINE */
+void	rl_replace_line(const char *text,int clear_undo);
 
 #endif
 /*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*/

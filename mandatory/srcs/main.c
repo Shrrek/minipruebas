@@ -120,6 +120,21 @@ void	ft_process_next_line(t_mini *minishell)
 		pipie*/
 }
 
+void	ft_signal_handler(int signal)
+{
+	if (signal == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	if (signal == SIGQUIT)
+	{
+		NULL;
+	}
+}
+
 int main(int argc, char **argv, char **envp)
 {
 	t_mini	minishell;
@@ -139,9 +154,18 @@ int main(int argc, char **argv, char **envp)
 	//minishell.minienv = ft_export_variable(minishell.minienv, "VAR2=PRUEBA2", &minishell);
 	//printf("\n\nDESPUES DE CREAR UNA VARIABLE - new_env1\n\n");
 	//ft_print2dstr(minishell.minienv);
+	signal(SIGINT, ft_signal_handler);
+	signal(SIGQUIT, ft_signal_handler);
 	while (1)
 	{
+//		signal(SIGINT, ft_signal_handler);
+//		signal(SIGQUIT, ft_signal_handler);
 		minishell.next_line = readline(">MiniTabaqueros ");
+		if (!minishell.next_line)
+		{
+			printf("exit\n");
+			exit(0);
+		}
 		ft_process_next_line(&minishell);
 //		printf("linea = %s\n", minishell.next_line);
 //		printf("\n%d\n", ft_parse_34(&minishell));

@@ -23,7 +23,7 @@ void	ft_process_error(int type, t_mini *minishell)
 	if (type == ARGS_ERROR)
 		printf("Error.\nNo arguments please.\n");
 	if (type == ENV_ERROR)
-		printf("No such file or directory.\n");
+		printf("No such file or directory\n");
 	ft_general_free(minishell);
 	exit(-1);
 }
