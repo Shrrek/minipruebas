@@ -51,22 +51,33 @@ char	**ft_export_variable(char **env, char *new_var, t_mini *minishell)
 	return (new_env);
 }
 
-int	ft_parse_34(t_mini *minishell)
+int	ft_parse_34_39(t_mini *minishell)
 {
 	int	i;
-	int	count;
+	int	count34;
+	int	count39;
 
-	count = 0;
+	count34 = 0;
+	count39 = 0;
 	i = 0;
 	while (minishell->next_line[i])
 	{
 		if (minishell->next_line[i] == 34)
 		{
-			count++;
+			count34++;
 		}
 		i++;
 	}
-	if (count %2 == 0)
+	i = 0;
+	while (minishell->next_line[i])
+	{
+		if (minishell->next_line[i] == 39)
+		{
+			count39++;
+		}
+		i++;
+	}
+	if (count34 %2 == 0 || count39 %2 == 0)
 		return (1);
 	return (0);
 }
@@ -77,7 +88,7 @@ void ft_no_quotes(char *str)
 	int j = 0;
 	while (str[i])
 	{
-		if (str[i] != '"')
+		if (str[i] != 34)
 		{
 			str[j] = str[i];
 			j++;
@@ -92,7 +103,7 @@ void	ft_process_next_line(t_mini *minishell)
 	char	*dst;
 	int		i;
 
-	if(ft_parse_34(minishell))
+	if(ft_parse_34_39(minishell))
 	{
 		if (ft_strstr(minishell->next_line, "echo"))
 		{
