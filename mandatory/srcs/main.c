@@ -141,6 +141,7 @@ int main(int argc, char **argv, char **envp)
 	
 	(void)argc;
 	(void)argv;
+	int	rl_catch_signals;
 	
 	if (argc > 1)
 		ft_process_error(ARGS_ERROR, &minishell);
@@ -154,18 +155,20 @@ int main(int argc, char **argv, char **envp)
 	//minishell.minienv = ft_export_variable(minishell.minienv, "VAR2=PRUEBA2", &minishell);
 	//printf("\n\nDESPUES DE CREAR UNA VARIABLE - new_env1\n\n");
 	//ft_print2dstr(minishell.minienv);
-	signal(SIGINT, ft_signal_handler);
-	signal(SIGQUIT, ft_signal_handler);
+	rl_catch_signals = 0;
+//	signal(SIGINT, ft_signal_handler);
+//	signal(SIGQUIT, ft_signal_handler);
 	while (1)
 	{
-//		signal(SIGINT, ft_signal_handler);
-//		signal(SIGQUIT, ft_signal_handler);
+		signal(SIGINT, ft_signal_handler);
+		signal(SIGQUIT, ft_signal_handler);
 		minishell.next_line = readline(">MiniTabaqueros ");
 		if (!minishell.next_line)
 		{
 			printf("exit\n");
 			exit(0);
 		}
+		add_history(minishell.next_line);
 		ft_process_next_line(&minishell);
 //		printf("linea = %s\n", minishell.next_line);
 //		printf("\n%d\n", ft_parse_34(&minishell));
