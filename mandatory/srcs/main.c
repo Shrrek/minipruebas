@@ -67,10 +67,24 @@ int	ft_parse_34(t_mini *minishell)
 		i++;
 	}
 	if (count %2 == 0)
-	{
 		return (1);
-	}
 	return (0);
+}
+
+void ft_no_quotes(char *str)
+{
+	int i = 0;
+	int j = 0;
+	while (str[i])
+	{
+		if (str[i] != '"')
+		{
+			str[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	str[j] = '\0';
 }
 
 void	ft_process_next_line(t_mini *minishell)
@@ -85,6 +99,7 @@ void	ft_process_next_line(t_mini *minishell)
 			i = 4;
 			if (minishell->next_line[i] != '\0')
 			{
+				ft_no_quotes(minishell->next_line);
 				dst =  &minishell->next_line[ft_strchr(minishell->next_line, ' ') + 1];
 				write (1, dst, ft_strlen(dst));
 			}
@@ -108,9 +123,9 @@ void	ft_process_next_line(t_mini *minishell)
 			ft_print2dstr_export(minishell->minienv);
 		}
 		
+	}
 	else 
 		ft_process_error(ERROR_34, minishell);
-	}
 /*	else if(jbshhhufse)
 		kjfkjsdhkj
 	else if (hjdsagjhsd)
@@ -141,7 +156,6 @@ int main(int argc, char **argv, char **envp)
 	
 	(void)argc;
 	(void)argv;
-	int	rl_catch_signals;
 	
 	if (argc > 1)
 		ft_process_error(ARGS_ERROR, &minishell);
@@ -156,12 +170,12 @@ int main(int argc, char **argv, char **envp)
 	//printf("\n\nDESPUES DE CREAR UNA VARIABLE - new_env1\n\n");
 	//ft_print2dstr(minishell.minienv);
 	rl_catch_signals = 0;
-//	signal(SIGINT, ft_signal_handler);
-//	signal(SIGQUIT, ft_signal_handler);
+	signal(SIGINT, ft_signal_handler);
+	signal(SIGQUIT, ft_signal_handler);
 	while (1)
 	{
-		signal(SIGINT, ft_signal_handler);
-		signal(SIGQUIT, ft_signal_handler);
+//		signal(SIGINT, ft_signal_handler);
+//		signal(SIGQUIT, ft_signal_handler);
 		minishell.next_line = readline(">MiniTabaqueros ");
 		if (!minishell.next_line)
 		{
