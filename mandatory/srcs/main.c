@@ -170,16 +170,7 @@ int main(int argc, char **argv, char **envp)
 	
 	if (argc > 1)
 		ft_process_error(ARGS_ERROR, &minishell);
-	//printf("\n\nDESPUES DE COPIAR\n\n");
 	minishell.minienv = ft_2dstrdup((const char **)envp, &minishell);
-	//printf("\n\nANTES DE HACER MOVIDAS - envp\n\n");
-	//minishell.minienv = ft_export_variable(minishell.minienv, "USER=PRUEBA", &minishell);
-	//printf("\n\nDESPUES DE MODIFICAR UNA VARIABLE - new_env\n\n");
-	//ft_print2dstr(minishell.minienv);
-	//ft_print2dstr(envp);
-	//minishell.minienv = ft_export_variable(minishell.minienv, "VAR2=PRUEBA2", &minishell);
-	//printf("\n\nDESPUES DE CREAR UNA VARIABLE - new_env1\n\n");
-	//ft_print2dstr(minishell.minienv);
 	rl_catch_signals = 0;
 	signal(SIGINT, ft_signal_handler);
 	signal(SIGQUIT, ft_signal_handler);
@@ -194,6 +185,8 @@ int main(int argc, char **argv, char **envp)
 			exit(0);
 		}
 		add_history(minishell.next_line);
+		if (ft_strstr(minishell.next_line, "history -c"))
+			rl_clear_history();
 		ft_process_next_line(&minishell);
 //		printf("linea = %s\n", minishell.next_line);
 //		printf("\n%d\n", ft_parse_34(&minishell));
