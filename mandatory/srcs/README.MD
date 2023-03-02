@@ -1,2 +1,0 @@
-# Minishell Project
-## Pequeño cambio
