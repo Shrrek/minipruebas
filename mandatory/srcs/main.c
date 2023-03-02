@@ -133,10 +133,19 @@ void	ft_process_next_line(t_mini *minishell)
 			minishell->minienv = ft_export_variable(minishell->minienv, &minishell->next_line[i + 1], minishell);
 			ft_print2dstr_export(minishell->minienv);
 		}
-		
+		else if (ft_strstr(minishell->next_line, "cd"))
+		{
+			minishell->minipath = getcwd(minishell->minipath, ft_strlen(minishell->minipath));
+			printf("la ruta es: %s\n", minishell->minipath);
+			/*NO SE PUEDE SEGUIR POR QUE NO PUEDO CREAR DIRECTORIOS DE PRUEBA DEBAJO DEL INICIO PARA PROBAR*/
+		}
 	}
 	else 
 		ft_process_error(ERROR_34, minishell);
+	printf(">MiniTabaqueros: ");
+	ft_print_line(minishell->next_line);
+	printf(": command not found\n");
+//	printf(">MiniTabaqueros: %s: command not found\n", );
 /*	else if(jbshhhufse)
 		kjfkjsdhkj
 	else if (hjdsagjhsd)

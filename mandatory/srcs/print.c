@@ -12,6 +12,21 @@
 
 #include "../incs/minishell.h"
 
+void	ft_print_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i])
+	{
+		while (str[i] != ' ' && str[i] != '\0')
+		{
+			printf("%c", str[i]);
+			i++;
+		}
+	}
+}
+
 void    ft_print2dstr(char **str)
 {
 	int i;
