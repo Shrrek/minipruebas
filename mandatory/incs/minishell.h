@@ -21,12 +21,14 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <termios.h>
+# include <dirent.h>
 
 # define MALLOC_ERROR 1
 # define NULL_ERROR 2
 # define ERROR_34 3
 # define ARGS_ERROR 4
 # define ENV_ERROR 5
+# define DIR_ERROR 6
 
 typedef struct s_mini
 {

@@ -51,11 +51,11 @@ char	**ft_2dstrdup(const char **str, t_mini *minishell)
 {
 	int		i;
 	char	**dst;
-
+	
 	i = -1;
 	if (!str)
 		return (NULL);
-	dst = (char **)malloc(sizeof(char *) * ((int)ft_2dstrlen + 1));
+	dst = (char **)malloc(sizeof(char *) * ((int)ft_2dstrlen(str)) + 1);
 	if (!dst)
 		ft_process_error(MALLOC_ERROR, minishell);
 	while (str[++i])

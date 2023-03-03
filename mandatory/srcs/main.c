@@ -102,6 +102,7 @@ void	ft_process_next_line(t_mini *minishell)
 {
 	char	*dst;
 	int		i;
+	char	*path;
 
 	if(ft_parse_34_39(minishell))
 	{
@@ -135,9 +136,14 @@ void	ft_process_next_line(t_mini *minishell)
 		}
 		else if (ft_strstr(minishell->next_line, "cd"))
 		{
-			minishell->minipath = getcwd(minishell->minipath, ft_strlen(minishell->minipath));
-			printf("la ruta es: %s\n", minishell->minipath);
-			/*NO SE PUEDE SEGUIR POR QUE NO PUEDO CREAR DIRECTORIOS DE PRUEBA DEBAJO DEL INICIO PARA PROBAR*/
+//			minishell->minipath = getcwd(minishell->minipath, ft_strlen(minishell->minipath));
+			minishell->minipath = getcwd(minishell->minipath, 1000);
+			printf("la ruta actual es: %s\n", minishell->minipath);
+			path =  &minishell->next_line[ft_strchr(minishell->next_line, ' ') + 1];
+//			if (!opendir(path))
+//				ft_process_error(DIR_ERROR, minishell);
+//			closedir(path);
+			chdir(path);
 		}
 	}
 	else 
