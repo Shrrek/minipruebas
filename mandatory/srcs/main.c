@@ -136,14 +136,24 @@ void	ft_process_next_line(t_mini *minishell)
 		}
 		else if (ft_strstr(minishell->next_line, "cd"))
 		{
+			minishell->minipath = NULL;
 //			minishell->minipath = getcwd(minishell->minipath, ft_strlen(minishell->minipath));
 			minishell->minipath = getcwd(minishell->minipath, 1000);
 			printf("la ruta actual es: %s\n", minishell->minipath);
 			path =  &minishell->next_line[ft_strchr(minishell->next_line, ' ') + 1];
-//			if (!opendir(path))
-//				ft_process_error(DIR_ERROR, minishell);
-//			closedir(path);
-			chdir(path);
+			if (ft_strstr(path, "cd"))
+			{
+				printf("Vamos al HOME\n");
+				chdir(minishell->minihome);
+			}
+			else
+			{
+				if (!opendir(path))
+					ft_process_error(DIR_ERROR, minishell);
+//				closedir(path);
+				chdir(path);
+				printf("la ruta cambiada es: %s\n", getcwd(minishell->minipath, 1000));
+			}
 		}
 	}
 	else 
@@ -186,6 +196,7 @@ int main(int argc, char **argv, char **envp)
 	if (argc > 1)
 		ft_process_error(ARGS_ERROR, &minishell);
 	minishell.minienv = ft_2dstrdup((const char **)envp, &minishell);
+	minishell.minihome = getenv("HOME");
 	rl_catch_signals = 0;
 	signal(SIGINT, ft_signal_handler);
 	signal(SIGQUIT, ft_signal_handler);

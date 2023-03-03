@@ -35,6 +35,7 @@ typedef struct s_mini
 	char	**minienv;
 	char	*next_line;
 	char	*minipath;
+	char	*minihome;
 
 }t_mini;
 
