@@ -37,11 +37,14 @@ char	**ft_change_env(char **env, char *var, char *str, t_mini *minishell)
 	size_t	var_len;
 
 	i = -1;
-	var_len = ft_strlen(str);
+	var_len = ft_strlen(var);
+	printf("%zu\n", var_len);
+	printf("%s\n", var);
+	printf("%s\n", str);
 	while (env[++i])
 	{
 		printf("ENTRA en %s\n", env[i]);
-		if (ft_strnstr(env[i], var, var_len + 1)>= 0)
+		if (ft_strnstr(env[i], var, var_len + 1) >= 0)
 		{
 			printf("ENTRA2\n");
 			env[i] = ft_strdup_free(str, minishell, env[i]);
