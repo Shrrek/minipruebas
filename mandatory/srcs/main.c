@@ -31,6 +31,25 @@ char	**ft_create_newenv(char **env, char *new_var, t_mini *minishell)
 	return (new_env);
 }
 
+char	**ft_change_env(char **env, char *var, char *str, t_mini *minishell)
+{
+	int		i;
+	size_t	var_len;
+
+	i = -1;
+	var_len = ft_strlen(str);
+	while (env[++i])
+	{
+		printf("ENTRA en %s\n", env[i]);
+		if (ft_strnstr(env[i], var, var_len + 1)>= 0)
+		{
+			printf("ENTRA2\n");
+			env[i] = ft_strdup_free(str, minishell, env[i]);
+		}
+	}
+	return(env);
+}
+
 char	**ft_export_variable(char **env, char *new_var, t_mini *minishell)
 {
 	int	i;
@@ -103,6 +122,7 @@ void	ft_process_next_line(t_mini *minishell)
 	char	*dst;
 	int		i;
 	char	*path;
+	char	*temp_path;
 
 	if(ft_parse_34_39(minishell))
 	{
@@ -137,24 +157,34 @@ void	ft_process_next_line(t_mini *minishell)
 		else if (ft_strstr(minishell->next_line, "cd"))
 		{
 			minishell->minipath = NULL;
+			temp_path = NULL;
 //			minishell->minipath = getcwd(minishell->minipath, ft_strlen(minishell->minipath));
 			minishell->minipath = getcwd(minishell->minipath, 1000);
-			printf("la ruta actual es: %s\n", minishell->minipath);
+			printf("la ruta antes de cambiar era: %s\n", minishell->minipath);
+			temp_path = ft_strdup(minishell->minipath,minishell);
 			path =  &minishell->next_line[ft_strchr(minishell->next_line, ' ') + 1];
 			if (ft_strstr(path, "cd"))
 			{
 				printf("Vamos al HOME\n");
 				chdir(minishell->minihome);
+				printf("la ruta es %s\n", minishell->minihome);
+				minishell->minienv = ft_change_env(minishell->minienv, "PWD", minishell->minihome ,minishell);
 			}
 			else
 			{
 				if (!opendir(path))
 					ft_process_error(DIR_ERROR, minishell);
-//				closedir(path);
+//				closedir(path);				
 				chdir(path);
-				printf("la ruta cambiada es: %s\n", getcwd(minishell->minipath, 1000));
+				minishell->minipath = getcwd(minishell->minipath, 1000);
+				printf("la pwd es: %s\n", minishell->minipath);
+				minishell->minienv = ft_change_env(minishell->minienv, "PWD", minishell->minipath ,minishell);
 			}
+			printf("la oldpwd es : %s\n", temp_path);
+			minishell->minienv = ft_change_env(minishell->minienv, "OLDPWD", temp_path ,minishell);
 		}
+		else if (ft_strstr(minishell->next_line, "pwd"))
+			printf("%s\n", getcwd(minishell->minipath, 1000));
 	}
 	else 
 		ft_process_error(ERROR_34, minishell);
