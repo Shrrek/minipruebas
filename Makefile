@@ -12,17 +12,27 @@ SRCS = $M$Smain.c\
 	   $M$Scopy.c\
 	   $M$Sfree.c\
 	   $M$Sprint.c\
-	   $M$Sprocess_errors.c\
+	   $M$Serrors.c\
 	   $M$Ssearch.c\
 	   $M$Ssize.c\
+	   $M$Sadd.c\
+	   $M$Scompare.c\
+	   $M$Sexport.c\
+	   $M$Sparse.c\
+	   $M$Ssignals.c\
 
 OBJS = $M$Omain.o\
 	   $M$Ocopy.o\
 	   $M$Ofree.o\
 	   $M$Oprint.o\
-	   $M$Oprocess_errors.o\
+	   $M$Oerrors.o\
 	   $M$Osearch.o\
 	   $M$Osize.o\
+	   $M$Oadd.o\
+	   $M$Ocompare.o\
+	   $M$Oexport.o\
+	   $M$Oparse.o\
+	   $M$Osignals.o\
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -47,6 +57,7 @@ $(OBJS): $M$O%.o: $M$S%.c
 $(NAME): $(OBJS)
 	@echo "Objects successfully created"
 	@echo "Compiling mandatory...."
+#	$(CC) $(CFLAGS) $(SANITIZE) $(COMPILE) -g3 $^ -o $(NAME)
 	$(CC) $(CFLAGS) $(COMPILE) -g3 $^ -o $(NAME)
 	@echo "Mandatory compiled"
 

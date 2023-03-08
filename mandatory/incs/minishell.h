@@ -1,76 +1,68 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jperales <jperales@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 18:09:36 by sperez-p          #+#    #+#             */
-/*   Updated: 2023/02/23 20:07:07 by jperales         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 
 # define MINISHELL_H
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <signal.h>
-# include <termios.h>
-# include <dirent.h>
-
-# define MALLOC_ERROR 1
-# define NULL_ERROR 2
-# define ERROR_34 3
-# define ARGS_ERROR 4
-# define ENV_ERROR 5
-# define DIR_ERROR 6
 
 typedef struct s_mini
 {
-	char	**minienv;
+	char	**mini_env;
 	char	*next_line;
-	char	*minipath;
-	char	*minihome;
+	char	*mini_home;
+	char	*mini_path;
+	char	**next_line_split;
+} t_mini;
 
-}t_mini;
+/* ADD FUCNTIONS */
+char *ft_join_chr(char *str, int c);
+char **ft_split(const char *str, char c);
+
+/* COMPARE FUNCTIONS */
+int	ft_str_equals(const char *str1, const char *str2);
 
 /* COPY FUNCTIONS */
-char	*ft_strdup(const char *str, t_mini *minishell);
-char	*ft_strdup_free(const char *str, t_mini *minishell, char *src);
-char	**ft_2dstrdup(const char **str, t_mini *minishell);
+char *ft_strdup(const char *str);
+char *ft_strndup(const char *str, size_t n);
+char **ft_2dstrdup(const char **str);
+char **ft_2dstrndup(const char **str, size_t cols);
+char **ft_2dnstrdup(const char **str, size_t rows);
+char **ft_2dnstrndup(const char **str, size_t rows, size_t cols);
+char *ft_swap_str(char *str);
+char **ft_swap_2dstr(char **str);
 
 /* ERROR FUNCTIONS */
-void	ft_process_error(int type, t_mini *minishell);
-
 /* FREE FUNCTIONS */
-void    ft_free_2d_str(char **str);
-void	ft_general_free(t_mini *minishell);
+void ft_free_2dstr(char **str);
+void ft_general_free(t_mini *minishell);
+
+/* MINISHELL FUNCTIONS */
+void	ft_export(t_mini *minishell);
+
+/* PARSE FUNCTIONS */
+int ft_parse_quotes(const char *str);
+char *ft_delete_quotes(char *str);
 
 /* PRINT FUNCTIONS */
-void    ft_print2dstr(char **str);
-void    ft_print2dstr_export(char **str);
-void	ft_print_line(char *str);
+void ft_print2dstr(char **str);
+/* READ FUNCTIONS */
+char *ft_read_input(char *str);
 
-/* SEARCH FUNCIONS */
-int		ft_strchr(const char *str, int c);
-int		ft_strnstr(const char *str, const char *substr, size_t n);
-char	*ft_strstr(const char *haystack, const char *needle);
+/* SEARCH FUNCTIONS */
+char *ft_strstr(const char *haystack, const char *needle);
 
-/* SIZE FUNCTIONS */
-size_t	ft_strlen(const char *str);
-size_t  ft_2dstrlen(const char **str);
-
-/* SIGNALS */
+/* SIGNALS FUNCTIONS */
 void	ft_signal_handler(int signal);
 
-/* READLINE */
-void	rl_replace_line(const char *text,int clear_undo);
+/* SIZE FUNCTIONS */
+size_t ft_strlen(const char *str);
+size_t ft_2dstrlen(const char **str);
+size_t *ft_2dstrstrlen(const char **str);
+int ft_get_chramt(const char *str, int c);
+int ft_get_chrlen(const char *str, int c);
 
 #endif
-/*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*/
-
