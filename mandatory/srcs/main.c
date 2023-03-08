@@ -5,7 +5,10 @@ static void	ft_process_next_line(t_mini *minishell)
 	/* Checkea que las comillas esten chapadas */
 	if (ft_parse_quotes((const char *)minishell->next_line))
 	{
-		printf("result Quotes: %s\n", ft_delete_quotes(minishell->next_line));
+		ft_delete_quotes(minishell->next_line);
+//		printf("result Quotes: %s\n", ft_delete_quotes(minishell->next_line));
+//		ft_delete_spaces(minishell->next_line);
+		ft_builts(minishell);
 	}
 	else
 		printf("Quotes error.\n");

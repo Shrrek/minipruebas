@@ -20,6 +20,7 @@ SRCS = $M$Smain.c\
 	   $M$Sexport.c\
 	   $M$Sparse.c\
 	   $M$Ssignals.c\
+   	   $M$Sbuilts.c\
 
 OBJS = $M$Omain.o\
 	   $M$Ocopy.o\
@@ -33,6 +34,7 @@ OBJS = $M$Omain.o\
 	   $M$Oexport.o\
 	   $M$Oparse.o\
 	   $M$Osignals.o\
+  	   $M$Obuilts.o\
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra

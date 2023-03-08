@@ -8,6 +8,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <dirent.h>
 
 typedef struct s_mini
 {
@@ -42,18 +43,21 @@ void ft_general_free(t_mini *minishell);
 
 /* MINISHELL FUNCTIONS */
 void	ft_export(t_mini *minishell);
+void	ft_builts(t_mini *minishell);
 
 /* PARSE FUNCTIONS */
-int ft_parse_quotes(const char *str);
-char *ft_delete_quotes(char *str);
+int	ft_parse_quotes(const char *str);
+char	*ft_delete_quotes(char *str);
+char	*ft_delete_spaces(char *str);
 
 /* PRINT FUNCTIONS */
-void ft_print2dstr(char **str);
+void	ft_print2dstr(char **str);
 /* READ FUNCTIONS */
-char *ft_read_input(char *str);
+char	*ft_read_input(char *str);
 
 /* SEARCH FUNCTIONS */
-char *ft_strstr(const char *haystack, const char *needle);
+char	*ft_strstr(const char *haystack, const char *needle);
+int ft_strchr(const char *str, int c);
 
 /* SIGNALS FUNCTIONS */
 void	ft_signal_handler(int signal);
