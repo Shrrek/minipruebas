@@ -29,15 +29,13 @@ char	*ft_delete_spaces(char *str)
 	return (str);
 }
 
-/*char	*ft_find_del(char *str, int quote, int *i, int *j)
+static char	*ft_find_del(char *str, int quote, int *i, int *j)
 {
 	if (str[*i] == quote)
 	{
-		(*i)++;
-		while (str[*i] != quote)
+		while (str[++(*i)] != quote)
 		{
 			str[*j] = str[*i];
-			(*i)++;
 			(*j)++;
 		}
 	}
@@ -55,43 +53,7 @@ char 	*ft_delete_quotes(char *str)
 	{
 		ft_find_del(str, 34, &i, &j);
 		ft_find_del(str, 39, &i, &j);
-		str[j]  = str[i];
-		j++;
-	}
-	str[j] = '\0';
-	return (str);
-}*/
-
-char *ft_delete_quotes(char *str)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	j = 0;
-	while (str[++i])
-	{
-		if (str[i] == 34)
-		{
-			i++;
-			while (str[i] != 34)
-			{
-				str[j] = str[i];
-				i++;
-				j++;
-			}
-		}
-		else if (str[i] == 39)
-		{
-			i++;
-			while (str[i] != 39)
-			{
-				str[j] = str[i];
-				i++;
-				j++;
-			}
-		}
-		else
+		if (str[i] != 34 && str[i] != 39)
 		{
 			str[j]  = str[i];
 			j++;

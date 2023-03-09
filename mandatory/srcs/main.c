@@ -7,7 +7,7 @@ static void	ft_process_next_line(t_mini *minishell)
 	{
 		ft_delete_quotes(minishell->next_line);
 //		printf("result Quotes: %s\n", ft_delete_quotes(minishell->next_line));
-//		ft_delete_spaces(minishell->next_line);
+		ft_delete_spaces(minishell->next_line);
 		ft_builts(minishell);
 	}
 	else
