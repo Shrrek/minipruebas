@@ -14,12 +14,27 @@ void    ft_builts(t_mini *minishell)
 		{
 			++i;
 			while (minishell->next_line_split[++i])
+			{
+				if (i == (int)ft_2dstrlen((const char **)minishell->next_line_split) - 1)
+				{
+					printf("%s", minishell->next_line_split[i]);
+					break;
+				}
 				printf("%s ", minishell->next_line_split[i]);
+			}
+
 		}
 		else if (ft_2dstrlen((const char **)minishell->next_line_split) > 1)
 		{
 			while (minishell->next_line_split[++i])
+			{
+				if (i == (int)ft_2dstrlen((const char **)minishell->next_line_split) - 1)
+				{
+					printf("%s", minishell->next_line_split[i]);
+					break;
+				}
 				printf("%s ", minishell->next_line_split[i]);
+			}
 			printf("\n");
 		}
 	}
