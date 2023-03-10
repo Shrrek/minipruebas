@@ -1,18 +1,5 @@
 #include "../incs/minishell.h"
 
-/*char	**ft_split_next_line(char *str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (str[i] != '\0' && str[i] == 32)
-		i++;
-	bash 
-	
-}*/
-
 static void	ft_process_next_line(t_mini *minishell)
 {
 	/* Checkea que las comillas esten chapadas */
@@ -22,13 +9,12 @@ static void	ft_process_next_line(t_mini *minishell)
 	if (ft_parse_quotes((const char *)minishell->next_line))
 	{
 		minishell->next_line_split = ft_split(minishell->next_line, ' ');
-		ft_print2dstr(minishell->next_line_split);
+//		ft_print2dstr(minishell->next_line_split);
 		while (minishell->next_line_split[++i])
 		{
 			ft_delete_spaces(minishell->next_line_split[i]);
 			ft_delete_quotes(minishell->next_line_split[i]);
 		}
-//		printf("result Quotes: %s\n", ft_delete_quotes(minishell->next_line));
 		ft_builts(minishell);
 	}
 	else
@@ -53,7 +39,6 @@ int main(int argc, char **argv, char **envp)
 	{
 		ft_init(&minishell, (const char **)envp);
 		/* Comprobar si van dentro o fuera del bucle */
-		//
 		signal(SIGINT, ft_signal_handler);
 		signal(SIGQUIT, ft_signal_handler);
 		while (1)

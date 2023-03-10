@@ -1,5 +1,6 @@
 #include "../incs/minishell.h"
 
+/*  */
 void    ft_builts(t_mini *minishell)
 {
 	int     i;
@@ -7,16 +8,22 @@ void    ft_builts(t_mini *minishell)
 	i = 0;
 	if (ft_str_equals(minishell->next_line_split[0], "env"))
 		ft_print2dstr(minishell->mini_env);
-    if (ft_str_equals(minishell->next_line_split[0], "echo"))
-	{
-		if (minishell->next_line_split[1] != NULL)
+    else if (ft_str_equals(minishell->next_line_split[0], "echo"))
+	{	
+		if (ft_str_equals(minishell->next_line_split[1], "-n"))
+		{
+			++i;
+			while (minishell->next_line_split[++i])
+				printf("%s ", minishell->next_line_split[i]);
+		}
+		else if (ft_2dstrlen((const char **)minishell->next_line_split) > 1)
 		{
 			while (minishell->next_line_split[++i])
-				printf("%s ", minishell->next_line_split[i]);	
+				printf("%s ", minishell->next_line_split[i]);
+			printf("\n");
 		}
-		printf("\n");
 	}
-	else if (ft_strstr(minishell->next_line, "pwd"))
+	else if (ft_str_equals(minishell->next_line_split[0], "pwd"))
 		printf("%s\n", getcwd(minishell->mini_path, 1000));
 }
 
