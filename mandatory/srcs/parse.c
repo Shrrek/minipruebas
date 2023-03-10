@@ -9,21 +9,34 @@ char	*ft_delete_spaces(char *str)
 	j = 0;
 	while (str[++i])
 	{
-		if (str[i] == 32 && str[i + 1] == 32)
+		if (str[i] == 34)
 		{
+			str[j] = str[i];
+			j++;
 			i++;
-			while (str[i] != 32)
+			while (str[i] && str[i] != 34)
 			{
 				str[j] = str[i];
 				i++;
 				j++;
 			}
 		}
-		else
+		if (str[i] == 39)
 		{
 			str[j] = str[i];
 			j++;
+			i++;
+			while (str[i] && str[i] != 39)
+			{
+				str[j] = str[i];
+				i++;
+				j++;
+			}
 		}
+		while (str[i] == 32 && str[i + 1] == 32)
+			i++;
+		str[j] = str[i];
+		j++;
 	}
 	str[j] = '\0';
 	return (str);

@@ -49,27 +49,61 @@ static char *ft_splitdup(const char *s, size_t start, size_t finish)
 static char **ft_process_string(char **dest, const char *str, char c)
 {
 	size_t i;
-	size_t p1;
+	size_t j;
 	size_t start;
 
 	i = 0;
-	p1 = 0;
+	j = 0;
 	start = 0;
 	while (str[i])
 	{
-		while (str[i] != c && str[i])
+		if (str[i] == 34 || str[i] == 39)
 		{
-			i++;
-			if (str[i] == c || i == ft_strlen(str))
-				dest[p1++] = ft_splitdup(str, start, i);
-		}
-		while (str[i] == c && str[i])
-		{
+			if (str[i] == 34)
+			{
+				i++;
+				while (str[i])
+				{
+					i++;
+					if (str[i] == 34)
+					{
+						dest[j++] = ft_splitdup(str, start, i + 1);
+						break;
+					}
+				}
+			}
+			else
+			{
+				i++;
+				while (str[i])
+				{
+					i++;
+					if (str[i] == 39)
+					{
+						dest[j++] = ft_splitdup(str, start, i + 1);
+						break;
+					}
+				}
+			}
 			i++;
 			start = i;
 		}
+		else
+		{
+			while (str[i] != c && str[i])
+			{
+				i++;
+				if (str[i] == c || i == ft_strlen(str))
+					dest[j++] = ft_splitdup(str, start, i);
+			}
+			while (str[i] == c && str[i])
+			{
+				i++;
+				start = i;
+			}			
+		}
 	}
-	dest[p1] = NULL;
+	dest[j] = NULL;
 	return (dest);
 }
 
@@ -82,11 +116,31 @@ static size_t ft_line_counter(const char *str, char c)
 		str++;
 	while (*str)
 	{
-		while (*str && *str != c)
+		if (*str == 34 || *str == 39)
+		{
+			if (*str == 34)
+			{
+				str++;
+				while (*str && *str != 34)
+					str++;
+			}
+			else
+			{
+				str++;
+				while (*str && *str != 39)
+					str++;
+			}
 			str++;
-		while (*str && *str == c)
-			str++;
-		count++;
+			count++;
+		}
+		else
+		{
+			while (*str && *str != c)
+				str++;
+			while (*str && *str == c)
+				str++;
+			count++;			
+		}
 	}
 	return (count);
 }
