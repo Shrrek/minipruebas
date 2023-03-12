@@ -48,15 +48,18 @@ static char *ft_splitdup(const char *s, size_t start, size_t finish)
 
 static char **ft_process_string(char **dest, const char *str, char c)
 {
+	printf("\nPROCESS STRING\n");
 	size_t i;
 	size_t j;
 	size_t start;
 
 	i = 0;
-	j = 0;
+	j = -1;
 	start = 0;
+	//printf("str del split = %s\n", str);
 	while (str[i])
 	{
+		//printf("ha entrado\n");
 		if (str[i] == 34 || str[i] == 39)
 		{
 			if (str[i] == 34)
@@ -67,7 +70,7 @@ static char **ft_process_string(char **dest, const char *str, char c)
 					i++;
 					if (str[i] == 34)
 					{
-						dest[j++] = ft_splitdup(str, start, i + 1);
+						dest[++j] = ft_splitdup(str, start, i + 1);
 						break;
 					}
 				}
@@ -80,7 +83,7 @@ static char **ft_process_string(char **dest, const char *str, char c)
 					i++;
 					if (str[i] == 39)
 					{
-						dest[j++] = ft_splitdup(str, start, i + 1);
+						dest[++j] = ft_splitdup(str, start, i + 1);
 						break;
 					}
 				}
@@ -93,8 +96,37 @@ static char **ft_process_string(char **dest, const char *str, char c)
 			while (str[i] != c && str[i])
 			{
 				i++;
-				if (str[i] == c || i == ft_strlen(str))
-					dest[j++] = ft_splitdup(str, start, i);
+				if (str[i] == 34)
+				{
+					i++;
+					while (str[i] && str[i] != 34)
+						i++;
+					if (str[i + 1] == c)
+					{
+						dest[++j] = ft_splitdup(str, start, i + 1);
+						break;			
+					}
+					while (str[i] && str[i] != c)
+						i++;
+					dest[++j] = ft_splitdup(str, start, i);
+				}
+				else if (str[i] == 39)
+				{
+					i++;
+					while (str[i] && str[i] != 39)
+						i++;
+					if (str[i + 1] == c)
+					{
+						dest[++j] = ft_splitdup(str, start, i + 1);
+						break;			
+					}
+					while (str[i] && str[i] != c)
+						i++;
+					dest[++j] = ft_splitdup(str, start, i);
+				}
+				else if (str[i] == c || i == ft_strlen(str))
+					dest[++j] = ft_splitdup(str, start, i);
+				
 			}
 			while (str[i] == c && str[i])
 			{
@@ -103,13 +135,36 @@ static char **ft_process_string(char **dest, const char *str, char c)
 			}			
 		}
 	}
-	dest[j] = NULL;
+	dest[++j] = NULL;
+	//printf("%s\n", dest[j]);
 	return (dest);
+}
+
+static void split_quotes(const char **str, int *count, char c)
+{
+	//printf("\nSPLIT QUOTES\n");
+	(*count)++;
+	if (*(*str)== 34)
+	{
+		(*str)++;
+			while (*(*str)&& *(*str)!= 34)
+			(*str)++;
+	}
+	else
+	{
+		(*str)++;
+		while (*(*str)&& *(*str)!= 39)
+			(*str)++;
+	}
+	(*str)++;
+	while (*(*str) && *(*str) != c)
+		(*str)++;
 }
 
 static size_t ft_line_counter(const char *str, char c)
 {
-	size_t count;
+	printf("\nLINE COUNTER\n");
+	int count;
 
 	count = 0;
 	while (*str == c && *str)
@@ -117,30 +172,29 @@ static size_t ft_line_counter(const char *str, char c)
 	while (*str)
 	{
 		if (*str == 34 || *str == 39)
-		{
-			if (*str == 34)
-			{
-				str++;
-				while (*str && *str != 34)
-					str++;
-			}
-			else
-			{
-				str++;
-				while (*str && *str != 39)
-					str++;
-			}
-			str++;
-			count++;
-		}
+			split_quotes(&str, &count, c);
 		else
 		{
 			while (*str && *str != c)
-				str++;
-			while (*str && *str == c)
-				str++;
-			count++;			
+			{
+				if (*str == 34)
+				{
+					str++;
+					while (*str && *str != 34)
+						str++;
+				}
+				else if (*str == 39)
+				{
+					str++;
+					while (*str && *str != 39)
+						str++;
+				}
+				str++;	
+			}
+			count++;
 		}
+		while (*str && *str == c)
+			str++;
 	}
 	return (count);
 }
@@ -151,9 +205,12 @@ char **ft_split(const char *str, char c)
 
 	if (!str)
 		return (NULL);
+	printf("%zu\n", ft_line_counter(str, c));
 	dest = (char **)malloc(sizeof(char *) * (ft_line_counter(str, c) + 1));
 	if (!dest)
 		return (NULL);
 	ft_process_string(dest, str, c);
+	ft_print2dstr(dest);
+	printf("\n");
 	return (dest);
 }

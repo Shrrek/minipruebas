@@ -5,11 +5,13 @@ static void	ft_process_next_line(t_mini *minishell)
 	/* Checkea que las comillas esten chapadas */
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (ft_parse_quotes((const char *)minishell->next_line))
 	{
+//		printf("next_line sin split = %s\n", minishell->next_line);
 		minishell->next_line_split = ft_split(minishell->next_line, ' ');
-//		ft_print2dstr(minishell->next_line_split);
+		//ft_print2dstr(minishell->next_line_split);
+		//*printf("%zu\n", ft_2dstrlen((const char **)minishell->next_line_split));
 		while (minishell->next_line_split[++i])
 		{
 			ft_delete_spaces(minishell->next_line_split[i]);
@@ -50,7 +52,6 @@ int main(int argc, char **argv, char **envp)
 			add_history(minishell.next_line);
 			if (ft_str_equals(minishell.next_line, "history -c"))
 				rl_clear_history();
-			
 			ft_process_next_line(&minishell);
 			free(minishell.next_line);
 		}

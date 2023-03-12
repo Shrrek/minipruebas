@@ -7,6 +7,7 @@ char	*ft_delete_spaces(char *str)
 
 	i = -1;
 	j = 0;
+	//printf("%s\n", str);
 	while (str[++i])
 	{
 		if (str[i] == 34)
@@ -46,10 +47,12 @@ static char	*ft_find_del(char *str, int quote, int *i, int *j)
 {
 	if (str[*i] == quote)
 	{
-		while (str[++(*i)] != quote)
+		++(*i);
+		while (str[*i] && str[(*i)] != quote)
 		{
 			str[*j] = str[*i];
 			(*j)++;
+			(*i)++;
 		}
 	}
 	return (str);
