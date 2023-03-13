@@ -60,16 +60,25 @@ static char **ft_process_string(char **dest, const char *str, char c)
 	while (str[i])
 	{
 		//printf("ha entrado\n");
+		/* Primero comprueba si empieza por comillas */
 		if (str[i] == 34 || str[i] == 39)
 		{
+			/* Identifica que comilla ha encontrado*/
 			if (str[i] == 34)
 			{
-				i++;
-				while (str[i])
+				/* Ahora recorrremos la cadena hasta que encuentre la siguiente comilla y 
+				el siguiente caracter a esta sea espacio o fin de cadena. Mientras no cumpla
+				con ambas condiciones seguira recorriendo la cadena. Como anteriormente a esto ya hemos
+				comprobado que  todas las comillas delimitantes tienen pareja, realmente no nos preocupa
+				no encontrarla por que va a estar */
+				while (str[++i])
 				{
-					i++;
+					/* Si encuentra su pareja de comillas toca examinar si su siguiente caracter es un espacio,
+					un caracter nulo, o si sigue habiendo contenido */
 					if (str[i] == 34)
 					{
+						while (str[i] != ' ' && str[i])
+							i++;
 						dest[++j] = ft_splitdup(str, start, i + 1);
 						break;
 					}
@@ -140,7 +149,7 @@ static char **ft_process_string(char **dest, const char *str, char c)
 	return (dest);
 }
 
-static void split_quotes(const char **str, int *count, char c)
+static void ft_split_quotes(const char **str, int *count, char c)
 {
 	//printf("\nSPLIT QUOTES\n");
 	(*count)++;
@@ -163,7 +172,7 @@ static void split_quotes(const char **str, int *count, char c)
 
 static size_t ft_line_counter(const char *str, char c)
 {
-	printf("\nLINE COUNTER\n");
+	//printf("\nLINE COUNTER\n");
 	int count;
 
 	count = 0;
@@ -172,7 +181,7 @@ static size_t ft_line_counter(const char *str, char c)
 	while (*str)
 	{
 		if (*str == 34 || *str == 39)
-			split_quotes(&str, &count, c);
+			ft_split_quotes(&str, &count, c);
 		else
 		{
 			while (*str && *str != c)
@@ -205,7 +214,7 @@ char **ft_split(const char *str, char c)
 
 	if (!str)
 		return (NULL);
-	printf("%zu\n", ft_line_counter(str, c));
+	printf("cantidad de argumentos = %zu\n", ft_line_counter(str, c));
 	dest = (char **)malloc(sizeof(char *) * (ft_line_counter(str, c) + 1));
 	if (!dest)
 		return (NULL);

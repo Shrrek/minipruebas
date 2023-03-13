@@ -24,6 +24,8 @@ static int	ft_checkn(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	if (str[i] != '-')
 		return (0);
 	i++;
