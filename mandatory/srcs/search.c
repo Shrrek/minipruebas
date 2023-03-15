@@ -1,5 +1,28 @@
 #include "../incs/minishell.h"
 
+char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	if (!needle || !haystack)
+		return (NULL);
+	if (!*needle)
+		return ((char *)haystack);
+	while (*(haystack + i) && n)
+	{
+		j = 0;
+		while (n-- && *(haystack + i + j) == *(needle + j))
+		{
+			if (*(needle + j++ + 1) == '\0')
+				return ((char *)(haystack + i));
+		}
+		i++;
+	}
+	return (NULL);
+}
+
 /*
  * Busca la primera aparicion de una subcadena en una cadena
  */

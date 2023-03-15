@@ -22,6 +22,8 @@ typedef struct s_mini
 /* ADD FUCNTIONS */
 char	*ft_join_chr(char *str, int c);
 char	**ft_split(const char *str, char c);
+char	*ft_strtrim(const char *str, char const *set);
+char	*ft_substr(const char *str, unsigned int start, size_t len);
 
 /* COMPARE FUNCTIONS */
 int		ft_str_equals(const char *str1, const char *str2);
@@ -45,6 +47,7 @@ void	ft_general_free(t_mini *minishell);
 void	ft_export(t_mini *minishell);
 void	ft_builts(t_mini *minishell);
 void	ft_echo(char **next_line);
+void	ft_process_expand(char **str, char **env);
 
 /* PARSE FUNCTIONS */
 int		ft_parse_quotes(const char *str);
@@ -59,6 +62,7 @@ char	*ft_read_input(char *str);
 /* SEARCH FUNCTIONS */
 char	*ft_strstr(const char *haystack, const char *needle);
 int		ft_strchr(const char *str, int c);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t n);
 
 /* SIGNALS FUNCTIONS */
 void	ft_signal_handler(int signal);

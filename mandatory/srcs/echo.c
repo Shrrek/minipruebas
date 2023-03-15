@@ -39,9 +39,7 @@ static int	ft_checkn(char *str)
 void	ft_echo(char **next_line)
 {
 	//printf("\nECHO\n");
-	int	i;
-
-	i = 0;
+	
 	if (ft_checkn(next_line[1]))
 		ft_write_args(&next_line[1]);
 	else if (next_line[1] != NULL)

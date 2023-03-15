@@ -72,12 +72,7 @@ int *ft_get_2dstr_order(const char **str)
 	//ft_print_nbrlst(pos_lst, lst_len);
 }
 
-
-
 // Devuelve el indice de la cadena mas pequeña dentro de un array
-
-
-
 
 void ft_print2dstr_export(char **str)
 {

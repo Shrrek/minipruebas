@@ -10,6 +10,11 @@ static void	ft_process_next_line(t_mini *minishell)
 	{
 //		printf("next_line sin split = %s\n", minishell->next_line);
 		minishell->next_line_split = ft_split(minishell->next_line, ' ');
+		//printf("Antes de expandir\n");
+		//ft_print2dstr(minishell->next_line_split);
+		ft_process_expand(minishell->next_line_split, minishell->mini_env);
+		//printf("Despues de expandir\n");
+		//ft_print2dstr(minishell->next_line_split);
 		//ft_print2dstr(minishell->next_line_split);
 		//*printf("%zu\n", ft_2dstrlen((const char **)minishell->next_line_split));
 		while (minishell->next_line_split[++i])
