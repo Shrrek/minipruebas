@@ -35,6 +35,7 @@ char	*ft_get_var(char *str)
 	char	*var;
 
 	i = 0;
+	//printf("valor de get_var %s\n", str);
 	if (!str)
 		return (NULL);
 	while (str[i] && str[i] != ' ' && str[i] != 34 && str[i] != 39 && str[i] != '$')
@@ -100,12 +101,14 @@ char	*ft_var_not_found(char *str, char *var)
 	int		j;
 	char	*new_value;
 
-	i = -1;
+	i = 0;
 	j = -1;
 	new_value = (char *)malloc(sizeof(char) * (ft_strlen(str) - ft_strlen(var)));
+	//printf("variable VAR entra a not_found %s\n", var);
+	//printf("variable STR entra a not_found %s\n", str);
 	if (!new_value)
 		return (NULL);
-	while (str[++i])
+	while (str[i])
 	{
 		if (str[i] == '$')
 		{
@@ -114,7 +117,7 @@ char	*ft_var_not_found(char *str, char *var)
 				i++;
 		}
 		else
-			new_value[++j] = str[i];
+			new_value[++j] = str[i++];
 	}
 	new_value[++j] = '\0';
 	return (new_value);	
@@ -140,25 +143,27 @@ void	ft_process_expand(char **str, char **env)
 		{
 			if (str[i][j] == 39)
 			{
+				//printf("%s\n", &str[i][j]);
 				j++;
 				while (str[i][j] != 39)
 					j++;		
 			}
-			
 			//printf("El argumento es =  %s\n", &str[i][j]);
 			/* Si se puede expandir */
 			if (str[i][j] == '$')
 			{
 				/* Obtiene el nombre de la variable */
 				var = ft_get_var(&str[i][j + 1]);
-				//printf("\nEl nombre de la variable es: %s\n", var);
+			//	printf("\nEl nombre de la variable es: %s\n", var);
 				/* Pilla el valor de la variable */
 				var_value = ft_get_env_var_val(var, env);
+			//	printf("valor de var_value %s\n", var_value);
 				if (!var_value)
 					str[i] = ft_var_not_found(str[i], var);
 				else
 					str[i] = ft_expand(var, var_value, str[i]);
 				//printf("El argumento es =  %s\n", &str[i][j]);
+
 				while (str[i][j] && str[i][j] !=34 && str[i][j] != '$' && str[i][j] != 32 && str[i][j] != 39)
 					j++;
 			}
