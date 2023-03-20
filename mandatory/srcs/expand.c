@@ -138,6 +138,13 @@ void	ft_process_expand(char **str, char **env)
 		j = 0;
 		while (str[i][j])
 		{
+			if (str[i][j] == 39)
+			{
+				j++;
+				while (str[i][j] != 39)
+					j++;		
+			}
+			
 			//printf("El argumento es =  %s\n", &str[i][j]);
 			/* Si se puede expandir */
 			if (str[i][j] == '$')
