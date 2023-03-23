@@ -61,7 +61,7 @@ void    ft_builts(t_mini *minishell)
 	else if (ft_str_equals(minishell->next_line_split[0], "cd"))
 		ft_cd(minishell);
 	else if (ft_str_equals(minishell->next_line_split[0], "unset"))
-		ft_unset(minishell);
+		minishell->mini_env = ft_unset(minishell);
 }
 
 /*void    ft_builts(t_mini *minishell)
