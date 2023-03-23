@@ -22,6 +22,11 @@ SRCS = $M$Smain.c\
 	   $M$Ssignals.c\
    	   $M$Sbuilts.c\
 	   $M$Secho.c\
+	   $M$Ssplit.c\
+	   $M$Sexpand.c\
+	   $M$Scd.c\
+	   $M$Sunset.c\
+
 
 OBJS = $M$Omain.o\
 	   $M$Ocopy.o\
@@ -37,6 +42,10 @@ OBJS = $M$Omain.o\
 	   $M$Osignals.o\
   	   $M$Obuilts.o\
 	   $M$Oecho.o\
+	   $M$Osplit.o\
+	   $M$Oexpand.o\
+	   $M$Ocd.o\
+	   $M$Ounset.o
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra

@@ -16,6 +16,7 @@ typedef struct s_mini
 	char	*next_line;
 	char	*mini_home;
 	char	*mini_path;
+	char	*mini_oldpath;
 	char	**next_line_split;
 } t_mini;
 
@@ -48,6 +49,8 @@ void	ft_export(t_mini *minishell);
 void	ft_builts(t_mini *minishell);
 void	ft_echo(char **next_line);
 void	ft_process_expand(char **str, char **env);
+void	ft_cd(t_mini *minishell);
+char	**ft_unset(t_mini *minishell);
 
 /* PARSE FUNCTIONS */
 int		ft_parse_quotes(const char *str);

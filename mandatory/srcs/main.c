@@ -8,21 +8,26 @@ static void	ft_process_next_line(t_mini *minishell)
 	i = -1;
 	if (ft_parse_quotes((const char *)minishell->next_line))
 	{
-//		printf("next_line sin split = %s\n", minishell->next_line);
-		minishell->next_line_split = ft_split(minishell->next_line, ' ');
-		//printf("Antes de expandir\n");
-		//ft_print2dstr(minishell->next_line_split);
-		ft_process_expand(minishell->next_line_split, minishell->mini_env);
-		//printf("Despues de expandir\n");
-		//ft_print2dstr(minishell->next_line_split);
-		//ft_print2dstr(minishell->next_line_split);
-		//*printf("%zu\n", ft_2dstrlen((const char **)minishell->next_line_split));
-		while (minishell->next_line_split[++i])
+		if (minishell->next_line[i + 1] == '$' && minishell->next_line[i + 2] == '?')
+			printf("Exits Status.\n");
+		else
 		{
-			ft_delete_spaces(minishell->next_line_split[i]);
-			ft_delete_quotes(minishell->next_line_split[i]);
+	//		printf("next_line sin split = %s\n", minishell->next_line);
+			minishell->next_line_split = ft_split(minishell->next_line, ' ');
+			//printf("Antes de expandir\n");
+			//ft_print2dstr(minishell->next_line_split);
+			ft_process_expand(minishell->next_line_split, minishell->mini_env);
+			//printf("Despues de expandir\n");
+			//ft_print2dstr(minishell->next_line_split);
+			//ft_print2dstr(minishell->next_line_split);
+			//*printf("%zu\n", ft_2dstrlen((const char **)minishell->next_line_split));
+			while (minishell->next_line_split[++i])
+			{
+				ft_delete_spaces(minishell->next_line_split[i]);
+				ft_delete_quotes(minishell->next_line_split[i]);
+			}
+			ft_builts(minishell);
 		}
-		ft_builts(minishell);
 	}
 	else
 		printf("Quotes error.\n");
