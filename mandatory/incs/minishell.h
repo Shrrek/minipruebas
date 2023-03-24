@@ -45,12 +45,13 @@ void	ft_free_2dstr(char **str);
 void	ft_general_free(t_mini *minishell);
 
 /* MINISHELL FUNCTIONS */
-void	ft_export(t_mini *minishell);
 void	ft_builts(t_mini *minishell);
 void	ft_echo(char **next_line);
 void	ft_process_expand(char **str, char **env);
 void	ft_cd(t_mini *minishell);
-char	**ft_unset(t_mini *minishell);
+void	ft_unset(t_mini *minishell);
+char	**ft_export(t_mini *minishell);
+void    ft_env(char **env);
 
 /* PARSE FUNCTIONS */
 int		ft_parse_quotes(const char *str);

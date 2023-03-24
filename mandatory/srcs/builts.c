@@ -53,7 +53,12 @@ void    ft_builts(t_mini *minishell)
 	//i = 0;
 	ft_process_quotes(minishell);
 	if (ft_str_equals(minishell->next_line_split[0], "env"))
-		ft_print2dstr(minishell->mini_env);
+	{
+		if (minishell->next_line_split[1] == NULL)
+			ft_env(minishell->mini_env);
+		else
+			printf("Env error. No puede ir con argumentos\n");
+	}
     else if (ft_str_equals(minishell->next_line_split[0], "echo"))
 		ft_echo(minishell->next_line_split);
 	else if (ft_str_equals(minishell->next_line_split[0], "pwd"))
@@ -61,7 +66,9 @@ void    ft_builts(t_mini *minishell)
 	else if (ft_str_equals(minishell->next_line_split[0], "cd"))
 		ft_cd(minishell);
 	else if (ft_str_equals(minishell->next_line_split[0], "unset"))
-		minishell->mini_env = ft_unset(minishell);
+		ft_unset(minishell);
+	else if (ft_str_equals(minishell->next_line_split[0], "export"))
+		minishell->mini_env = ft_export(minishell);
 }
 
 /*void    ft_builts(t_mini *minishell)

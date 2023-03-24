@@ -26,6 +26,7 @@ SRCS = $M$Smain.c\
 	   $M$Sexpand.c\
 	   $M$Scd.c\
 	   $M$Sunset.c\
+	   $M$Senv.c
 
 
 OBJS = $M$Omain.o\
@@ -45,7 +46,8 @@ OBJS = $M$Omain.o\
 	   $M$Osplit.o\
 	   $M$Oexpand.o\
 	   $M$Ocd.o\
-	   $M$Ounset.o
+	   $M$Ounset.o\
+	   $M$Oenv.o
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra

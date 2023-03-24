@@ -13,6 +13,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 	while (*(haystack + i) && n)
 	{
 		j = 0;
+		
 		while (n-- && *(haystack + i + j) == *(needle + j))
 		{
 			if (*(needle + j++ + 1) == '\0')
@@ -22,6 +23,8 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 	}
 	return (NULL);
 }
+
+
 
 /*
  * Busca la primera aparicion de una subcadena en una cadena
@@ -58,6 +61,7 @@ int	ft_strchr(const char *str, int c)
 	int	i;
 
 	i = -1;
+	//printf("cadena en strchr = %s\n", str);
 	while (str[++i])
 	{
 		if (str[i] == c)

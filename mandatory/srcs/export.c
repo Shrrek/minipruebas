@@ -92,41 +92,147 @@ void ft_print2dstr_export(char **str)
 			{
 				printf("%c", str[pos_lst[i]][j]);
 				j++;
-				printf("\"");
+
 			}
 			printf("%c", str[pos_lst[i]][j]);
 		}
-		printf("\"\n");
+		printf("\n");
 	}
 }
 
-void	ft_export(t_mini *minishell)
+char	*ft_strdup_free(const char *str, char *src)
 {
-	printf("EXPORT VARIABLE");
+	int		i;
+	char	*dst;
+
+	i = -1;
+	if (!str)
+		return (NULL);
+	dst = (char *)malloc(sizeof(char) * ft_strlen((const char *)str) + 1);
+	if (!dst)
+		return (NULL);
+	while (str[++i])
+		dst[i] = str[i];
+	dst[i] = '\0';
+	free(src);
+	return (dst);
+}
+
+char	**ft_create_newenv(char **env, char *new_var)
+{
+	char	**new_env;
+	size_t	env_len;
+	int	i;
+
+	i = -1;
+	env_len = ft_2dstrlen((const char **)env) + 2;
+	new_env = (char **)malloc(sizeof(char *) * env_len);
+	if (!new_env)
+		return (NULL);
+	while (env[++i])
+		new_env[i] = ft_strdup(env[i]);
+	new_env[i] = ft_strdup(new_var);
+	new_env[++i] = NULL;
+	ft_free_2dstr(env);
+	return (new_env);
+}
+
+/*char	**ft_export(t_mini *minishell)
+{	
+	int i;
+	size_t var_len;
+	char **new_env;
+	size_t	nl_len;
+
+	i = -1;
+	new_env = NULL;
+//	printf("EXPORT VARIABLE\n");
 
 	// Conseguir longitud de next line
-	size_t	nl_len = ft_2dstrlen((const char **)minishell->next_line_split);
+	nl_len = ft_2dstrlen((const char **)minishell->next_line_split);
 	// Si la longitud es uno escribimos el env de forma especial
 	if (nl_len == 1)
 	{
 		ft_print2dstr_export(minishell->mini_env);
+		return (minishell->mini_env);
 	}
-}
-/*	int i;
-	size_t var_len;
-	char **new_env;
-
-	i = -1;
-
-	var_len = ft_strchr(minishell->next_line[1], '=');
-	while (env[++i])
+	else
 	{
-		if (ft_strnstr(env[i], new_var, var_len + 1) >= 0)
+		var_len = ft_strchr((const char *)minishell->next_line_split[1], '=');
+		printf("next_line_split[1]")
+	//	ft_print2dstr(minishell->mini_env);
+		while (minishell->mini_env[++i])
 		{
-			env[i] = ft_strdup_free(new_var, minishell, env[i]);
-			return (env);
+			if (ft_strnstr(minishell->mini_env[i], minishell->next_line_split[1], var_len + 1) >= 0)
+			{
+				minishell->mini_env[i] = ft_strdup_free(minishell->next_line_split[1], minishell->mini_env[i]);
+				break ;
+			}
+		}
+		new_env = ft_create_newenv(minishell->mini_env, minishell->next_line_split[1]);
+	}
+	return (new_env);	
+}*/
+
+int	ft_search_string(char *str1, char *str2, int n)
+{
+	int	i;
+	
+	i = 0;
+	if (!str1 || !str2)
+		return (0);
+	while (str1[i] == str2[i] && str1[i] && str2[i] && n--)
+	{
+		if (n == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	**ft_export(t_mini *minishell)
+{
+	int		i;
+	size_t	input_len;
+	int		var_len;
+	int		j;
+
+	i = 0;
+	input_len = ft_2dstrlen((const char **)minishell->next_line_split);
+	/* Cuando solo ponen export */
+	//ft_print2dstr(minishell->next_line_split);
+	if (input_len == 1)
+	{
+		ft_print2dstr_export(minishell->mini_env);
+		return (minishell->mini_env);
+	}
+	else
+	{
+		var_len = ft_strchr((const char *)minishell->next_line_split[1], '=');
+		//printf("%d\n", var_len);
+		// recorremos cada uno de los argumentos que le han pasado al export
+		while (minishell->next_line_split[++i])
+		{
+			j = -1;
+			//printf("next_linesplit = %s\n", minishell->next_line_split[i]);
+			while(minishell->mini_env[++j])
+			{
+				//printf("mini_env = %s\n", minishell->mini_env[j]);
+				if (ft_search_string(minishell->mini_env[j], minishell->next_line_split[i], var_len))
+				{
+				//	printf("ha encontrado la variable\n");
+				//	printf("minienv de i antes = %s\n", minishell->mini_env[j]);
+					minishell->mini_env[j] = ft_strdup_free(minishell->next_line_split[i], minishell->mini_env[j]);
+				//	printf("minienv de i = %s\n", minishell->mini_env[j]);
+					break ;
+				}				
+			}
+			if (minishell->mini_env[j] == NULL)
+			{
+				printf("no encuentra variable\n");
+				minishell->mini_env = ft_create_newenv(minishell->mini_env, minishell->next_line_split[i]);
+			}
 		}
 	}
-	new_env = ft_create_newenv(env, new_var, minishell);
-	return (new_env);
-}*/
+	return (minishell->mini_env);
+}
