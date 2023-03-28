@@ -51,14 +51,14 @@ void	ft_cd(t_mini *minishell)
 	minishell->mini_oldpath = NULL;
 //	minishell->mini_path = getcwd(minishell->minipath, ft_strlen(minishell->minipath));
 	minishell->mini_path = getcwd(minishell->mini_path, 1000);
-	printf("la ruta antes de cambiar era: %s\n", minishell->mini_path);
+//	printf("la ruta antes de cambiar era: %s\n", minishell->mini_path);
 	minishell->mini_oldpath = ft_strdup(minishell->mini_path);
 	path =  &minishell->next_line[ft_strchr(minishell->next_line, ' ') + 1];
 	if (ft_strstr(path, "cd"))
 	{
-		printf("Vamos al HOME\n");
+	//	printf("Vamos al HOME\n");
 		chdir(minishell->mini_home);
-		printf("la ruta es %s\n", minishell->mini_home);
+	//	printf("la ruta es %s\n", minishell->mini_home);
 		minishell->mini_env = ft_change_env(minishell, "PWD=", minishell->mini_home);
 	}
 	else

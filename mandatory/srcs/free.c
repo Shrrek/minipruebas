@@ -9,6 +9,8 @@ void ft_free_2dstr(char **str)
 	int i;
 
 	i = -1;
+	if (!str)
+		return ;
 	while (str[++i])
 		free(str[i]);
 	free(str);

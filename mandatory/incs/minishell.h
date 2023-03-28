@@ -50,7 +50,7 @@ void	ft_echo(char **next_line);
 void	ft_process_expand(char **str, char **env);
 void	ft_cd(t_mini *minishell);
 void	ft_unset(t_mini *minishell);
-char	**ft_export(t_mini *minishell);
+void	ft_export(t_mini *minishell);
 void    ft_env(char **env);
 
 /* PARSE FUNCTIONS */
