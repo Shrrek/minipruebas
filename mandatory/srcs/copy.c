@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   copy.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jperales <jperales@student.42urduli>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/28 19:14:42 by jperales          #+#    #+#             */
+/*   Updated: 2023/03/28 19:14:45 by jperales         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 
 /* 
@@ -8,8 +20,8 @@
 char	*ft_swap_str(char *str)
 {
 	//printf("\nSWAP STR\n");
-	int i;
-	char *dst;
+	int		i;
+	char	*dst;
 
 	i = -1;
 	if (!str)
@@ -32,8 +44,8 @@ char	*ft_swap_str(char *str)
 char	*ft_strdup(const char *str)
 {
 	//printf("\nSTRDUP\n");
-	int i;
-	char *dst;
+	int		i;
+	char	*dst;
 
 	i = -1;
 	if (!str)
@@ -80,8 +92,8 @@ char	*ft_strndup(const char *str, size_t n)
 char	**ft_swap_2dstr(char **str)
 {
 	//printf("\nSWAP 2DSTR\n");
-	int i;
-	char **dst;
+	int		i;
+	char	**dst;
 
 	i = -1;
 	if (!str)
@@ -101,11 +113,11 @@ char	**ft_swap_2dstr(char **str)
  * Si se utiliza para reasignar un valor a una variable, hay que utilizar una funcion
  * que copie el contenido y libere el antiguo espacio de memoria despues.
  */
-char **ft_2dstrdup(const char **str)
+char	**ft_2dstrdup(const char **str)
 {
 	//printf("\n2DSTRDUP\n");
-	int i;
-	char **dst;
+	int		i;
+	char	**dst;
 
 	i = -1;
 	if (!str)
@@ -124,7 +136,7 @@ char **ft_2dstrdup(const char **str)
  * Si se utiliza para reasignar un valor a una variable, hay que utilizar una funcion
  * que copie el contenido y libere el antiguo espacio de memoria despues.
  */
-char **ft_2dstrndup(const char **str, size_t cols)
+char	**ft_2dstrndup(const char **str, size_t cols)
 {
 	//printf("\n2DSTRNDUP\n");
 	int		i;
@@ -150,7 +162,7 @@ char **ft_2dstrndup(const char **str, size_t cols)
 char	**ft_2dnstrdup(const char **str, size_t rows)
 {
 	//printf("\n2DNSTRDUP\n");
-	char 	**dst;
+	char	**dst;
 	size_t	len;
 
 	if (!str)
@@ -175,9 +187,9 @@ char	**ft_2dnstrdup(const char **str, size_t rows)
 char	**ft_2dnstrndup(const char **str, size_t rows, size_t cols)
 {
 	//printf("\n2DNSTRNDUP\n");
-	int i;
-	char **dst;
-	size_t len;
+	int		i;
+	char	**dst;
+	size_t	len;
 
 	i = -1;
 	if (!str)

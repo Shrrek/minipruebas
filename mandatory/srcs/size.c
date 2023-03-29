@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   size.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jperales <jperales@student.42urduli>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/29 16:12:27 by jperales          #+#    #+#             */
+/*   Updated: 2023/03/29 16:12:30 by jperales         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 /*
  * Calcula la cantidad de caracteres que forman una cadena
  */
-size_t ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
 	//printf("\nSTRLEN\n");
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (!str)
@@ -18,10 +30,10 @@ size_t ft_strlen(const char *str)
 /*
  * Calcula la cantidad de cadenas que formar un array de cadenas
  */
-size_t ft_2dstrlen(const char **str)
+size_t	ft_2dstrlen(const char **str)
 {
 	//printf("\n2DSTRLEN\n");
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (!str)
@@ -35,15 +47,16 @@ size_t ft_2dstrlen(const char **str)
  * Calcula la cantidad de caracteres que tienen cada cadena que forma un array de cadenas
  * Devuelve un array de size_ts con la longitud de cada cadena
  */
-size_t *ft_2dstrstrlen(const char **str)
+size_t	*ft_2dstrstrlen(const char **str)
 {
 	//printf("\n2DSTRSTRLEN\n");
-	size_t *lens;
+	size_t	*lens;
+	int		i;
 
 	lens = (size_t *)malloc(sizeof(size_t) * ft_2dstrlen(str));
 	if (!lens)
 		return (NULL);
-	int i = -1;
+	i = -1;
 	while (str[++i])
 		lens[i] = ft_strlen(str[i]);
 	return (lens);
@@ -52,11 +65,11 @@ size_t *ft_2dstrstrlen(const char **str)
 /*
  * Calcula la cantidad de veces que aparece un caracter en una cadena.
  */
-int ft_get_chramt(const char *str, int c)
+int	ft_get_chramt(const char *str, int c)
 {
 	//printf("\nGET CHRAMT\n");
-	int i;
-	int amt;
+	int	i;
+	int	amt;
 
 	i = -1;
 	amt = 0;
@@ -77,10 +90,10 @@ int ft_get_chramt(const char *str, int c)
 /*
  * Devuelve el indice de la primera aparicion c dentro de la cadena
  */
-int ft_get_chrlen(const char *str, int c)
+int	ft_get_chrlen(const char *str, int c)
 {
 	//printf("\nGET CHRLEN\n");
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)

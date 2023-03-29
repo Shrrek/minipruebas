@@ -52,6 +52,7 @@ void	ft_cd(t_mini *minishell);
 void	ft_unset(t_mini *minishell);
 void	ft_export(t_mini *minishell);
 void    ft_env(char **env);
+int		*ft_get_2dstr_order(const char **str);
 
 /* PARSE FUNCTIONS */
 int		ft_parse_quotes(const char *str);

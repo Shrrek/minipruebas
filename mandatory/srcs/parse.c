@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jperales <jperales@student.42urduli>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/29 16:05:21 by jperales          #+#    #+#             */
+/*   Updated: 2023/03/29 16:05:24 by jperales         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 
 char	*ft_delete_spaces(char *str)
@@ -58,7 +70,7 @@ static char	*ft_find_del(char *str, int quote, int *i, int *j)
 	return (str);
 }
 
-char 	*ft_delete_quotes(char *str)
+char	*ft_delete_quotes(char *str)
 {
 	int	i;
 	int	j;
@@ -71,7 +83,7 @@ char 	*ft_delete_quotes(char *str)
 		ft_find_del(str, 39, &i, &j);
 		if (str[i] != 34 && str[i] != 39)
 		{
-			str[j]  = str[i];
+			str[j] = str[i];
 			j++;
 		}
 	}
@@ -79,35 +91,35 @@ char 	*ft_delete_quotes(char *str)
 	return (str);
 }
 
-static int  ft_check_quote(const char *str, int quote, int *i)
+static int	ft_check_quote(const char *str, int quote, int *i)
 {
-    if (str[*i] == quote)
-    {
-        (*i)++;
-        while (str[*i] && str[*i] != quote)
-            (*i)++;
-        if (str[*i])
-            return (1);
-        return (0);
-    }
-    return (1);
+	if (str[*i] == quote)
+	{
+		(*i)++;
+		while (str[*i] && str[*i] != quote)
+			(*i)++;
+		if (str[*i])
+			return (1);
+		return (0);
+	}
+	return (1);
 }
 
-int ft_parse_quotes(const char *str)
+int	ft_parse_quotes(const char *str)
 {
-    int     i;
-    int		quote_34;
-    int		quote_39;
+	int		i;
+	int		quote_34;
+	int		quote_39;
 
-    i = -1;
-    quote_34 = 1;
-    quote_39 = 1;
-    while (str[++i])
-    {
-        quote_34 = ft_check_quote(str, 34, &i);
-        quote_39 = ft_check_quote(str, 39, &i);
-    }
-    if (quote_34 == 1 && quote_39 == 1)
-        return (1);
-    return (0);
+	i = -1;
+	quote_34 = 1;
+	quote_39 = 1;
+	while (str[++i])
+	{
+		quote_34 = ft_check_quote(str, 34, &i);
+		quote_39 = ft_check_quote(str, 39, &i);
+	}
+	if (quote_34 == 1 && quote_39 == 1)
+		return (1);
+	return (0);
 }

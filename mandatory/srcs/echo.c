@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jperales <jperales@student.42urduli>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/28 19:21:37 by jperales          #+#    #+#             */
+/*   Updated: 2023/03/28 19:21:40 by jperales         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 
 static void	ft_write_args(char **next_line)
@@ -13,7 +25,7 @@ static void	ft_write_args(char **next_line)
 		if (i == len)
 		{
 			printf("%s", next_line[i]);
-			break;
+			break ;
 		}
 		printf("%s ", next_line[i]);
 	}
@@ -32,14 +44,13 @@ static int	ft_checkn(char *str)
 	while (str[i] && str[i] == 'n')
 		i++;
 	if (str[i] == '\0')
-		return(1);
-	return(0);
+		return (1);
+	return (0);
 }
 
 void	ft_echo(char **next_line)
 {
 	//printf("\nECHO\n");
-	
 	if (ft_checkn(next_line[1]))
 		ft_write_args(&next_line[1]);
 	else if (next_line[1] != NULL)

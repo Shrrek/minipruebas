@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jperales <jperales@student.42urduli>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/29 16:03:43 by jperales          #+#    #+#             */
+/*   Updated: 2023/03/29 16:03:46 by jperales         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 
 static void	ft_process_next_line(t_mini *minishell)
@@ -33,7 +45,7 @@ static void	ft_process_next_line(t_mini *minishell)
 		printf("Quotes error.\n");
 }
 
-static void ft_init(t_mini *minishell, const char **env)
+static void	ft_init(t_mini *minishell, const char **env)
 {
 	minishell->mini_env = ft_2dstrdup(env);
 	minishell->next_line = NULL;
@@ -42,7 +54,7 @@ static void ft_init(t_mini *minishell, const char **env)
 	rl_catch_signals = 0;
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_mini	minishell;
 
@@ -68,5 +80,5 @@ int main(int argc, char **argv, char **envp)
 		ft_general_free(&minishell);
 	}
 	printf("Error. Númmero de argumentos inválido.");
-	return	(0);
+	return (0);
 }

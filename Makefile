@@ -12,12 +12,12 @@ SRCS = $M$Smain.c\
 	   $M$Scopy.c\
 	   $M$Sfree.c\
 	   $M$Sprint.c\
-	   $M$Serrors.c\
 	   $M$Ssearch.c\
 	   $M$Ssize.c\
 	   $M$Sadd.c\
 	   $M$Scompare.c\
 	   $M$Sexport.c\
+	   $M$Sexport_utils.c\
 	   $M$Sparse.c\
 	   $M$Ssignals.c\
    	   $M$Sbuilts.c\
@@ -33,12 +33,12 @@ OBJS = $M$Omain.o\
 	   $M$Ocopy.o\
 	   $M$Ofree.o\
 	   $M$Oprint.o\
-	   $M$Oerrors.o\
 	   $M$Osearch.o\
 	   $M$Osize.o\
 	   $M$Oadd.o\
 	   $M$Ocompare.o\
 	   $M$Oexport.o\
+	   $M$Oexport_utils.o\
 	   $M$Oparse.o\
 	   $M$Osignals.o\
   	   $M$Obuilts.o\

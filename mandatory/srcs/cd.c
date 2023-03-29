@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jperales <jperales@student.42urduli>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/28 19:10:41 by jperales          #+#    #+#             */
+/*   Updated: 2023/03/28 19:10:44 by jperales         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -28,10 +40,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (dest);
 }
 
-char    **ft_change_env(t_mini *minishell, char *str, char *var)
+char	**ft_change_env(t_mini *minishell, char *str, char *var)
 {
-	int i;
-	size_t  var_len;
+	int		i;
+	size_t	var_len;
 
 	i = -1;
 	var_len = ft_strchr(str, '=');
@@ -45,7 +57,7 @@ char    **ft_change_env(t_mini *minishell, char *str, char *var)
 
 void	ft_cd(t_mini *minishell)
 {
-	char    *path;
+	char	*path;
 
 	minishell->mini_path = NULL;
 	minishell->mini_oldpath = NULL;
@@ -53,7 +65,7 @@ void	ft_cd(t_mini *minishell)
 	minishell->mini_path = getcwd(minishell->mini_path, 1000);
 //	printf("la ruta antes de cambiar era: %s\n", minishell->mini_path);
 	minishell->mini_oldpath = ft_strdup(minishell->mini_path);
-	path =  &minishell->next_line[ft_strchr(minishell->next_line, ' ') + 1];
+	path = &minishell->next_line[ft_strchr(minishell->next_line, ' ') + 1];
 	if (ft_strstr(path, "cd"))
 	{
 	//	printf("Vamos al HOME\n");
@@ -66,7 +78,7 @@ void	ft_cd(t_mini *minishell)
 		if (chdir(path) == -1)
 		{
 			printf("No such file or directory\n");
-			return;
+			return ;
 		}
 		else
 		{

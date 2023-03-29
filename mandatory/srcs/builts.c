@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builts.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jperales <jperales@student.42urduli>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/28 19:05:47 by jperales          #+#    #+#             */
+/*   Updated: 2023/03/28 19:05:50 by jperales         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 
 char	*ft_substr(const char *str, unsigned int start, size_t len)
@@ -7,7 +19,7 @@ char	*ft_substr(const char *str, unsigned int start, size_t len)
 	char	*dst;
 
 	if (!str)
-		return(NULL);
+		return (NULL);
 	if (start > ft_strlen(str))
 		return (ft_strdup(""));
 	str = str + start;
@@ -15,7 +27,7 @@ char	*ft_substr(const char *str, unsigned int start, size_t len)
 	if (len > new_len)
 		len = new_len;
 	dst = ft_strndup(str, len);
-	return (dst);	
+	return (dst);
 }
 
 char	*ft_strtrim(const char *str, char const *set)
@@ -40,11 +52,11 @@ static void	ft_process_quotes(t_mini *minishell)
 		if (minishell->next_line_split[0][0] == 34)
 			minishell->next_line_split[0] = ft_strtrim(minishell->next_line_split[0], "\"");
 		else if (minishell->next_line_split[0][0] == 39)
-			minishell->next_line_split[0] = ft_strtrim(minishell->next_line_split[0], "\'");		
+			minishell->next_line_split[0] = ft_strtrim(minishell->next_line_split[0], "\'");
 	}
 }
 
-void    ft_builts(t_mini *minishell)
+void	ft_builts(t_mini *minishell)
 {
 	ft_process_quotes(minishell);
 	if (ft_str_equals(minishell->next_line_split[0], "env"))
@@ -54,7 +66,7 @@ void    ft_builts(t_mini *minishell)
 		else
 			printf("Env error. No puede ir con argumentos\n");
 	}
-    else if (ft_str_equals(minishell->next_line_split[0], "echo"))
+	else if (ft_str_equals(minishell->next_line_split[0], "echo"))
 		ft_echo(minishell->next_line_split);
 	else if (ft_str_equals(minishell->next_line_split[0], "pwd"))
 		printf("%s\n", getcwd(minishell->mini_path, 1000));

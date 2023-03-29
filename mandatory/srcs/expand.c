@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jperales <jperales@student.42urduli>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/28 19:26:51 by jperales          #+#    #+#             */
+/*   Updated: 2023/03/28 19:26:54 by jperales         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/minishell.h"
 
 /* Busca si una variable forma parte de las variables del entorno. Si
 la encuentra devuelve su valor, sino devuelve el nombre de la variable. */
 char	*ft_get_env_var_val(char *var, char **env)
 {
-	size_t var_len;
-	size_t env_var_len;
-	char *env_var_content;
-	int i;
+	size_t	var_len;
+	size_t	env_var_len;
+	char	*env_var_content;
+	int		i;
 
 	i = -1;
 	var_len = ft_strlen(var);
@@ -19,7 +31,7 @@ char	*ft_get_env_var_val(char *var, char **env)
 			if (ft_strnstr(env[i], var, var_len))
 			{
 				env_var_content = ft_strdup(&env[i][env_var_len + 1]);
-				return env_var_content;
+				return (env_var_content);
 			}
 		}
 	}
@@ -76,14 +88,13 @@ char	*ft_expand(char *var, char *var_value, char *str)
 				new_value[++j] = var_value[k];
 			while (str[i] && str[i] != ' ' && str[i] != 34 && str[i] != '$' && str[i] != 39) // pensar como meter el dolar
 				i++;
-			break;
+			break ;
 		}
 		else
 		{
 			new_value[++j] = str[i];
-			i++;		
+			i++;
 		}
-
 	}
 	while (str[i])
 	{
@@ -113,14 +124,14 @@ char	*ft_var_not_found(char *str, char *var)
 		if (str[i] == '$')
 		{
 			i++;
-			while (str[i] && str[i] !=34 && str[i] != '$' && str[i] != 32 && str[i] != 39)
+			while (str[i] && str[i] != 34 && str[i] != '$' && str[i] != 32 && str[i] != 39)
 				i++;
 		}
 		else
 			new_value[++j] = str[i++];
 	}
 	new_value[++j] = '\0';
-	return (new_value);	
+	return (new_value);
 }
 
 void	ft_process_expand(char **str, char **env)
@@ -129,7 +140,6 @@ void	ft_process_expand(char **str, char **env)
 	int		j;
 	char	*var;
 	char	*var_value;
-
 
 	i = -1;
 	/*printf("\n");
@@ -146,7 +156,7 @@ void	ft_process_expand(char **str, char **env)
 				//printf("%s\n", &str[i][j]);
 				j++;
 				while (str[i][j] != 39)
-					j++;		
+					j++;
 			}
 			//printf("El argumento es =  %s\n", &str[i][j]);
 			/* Si se puede expandir */
@@ -163,8 +173,7 @@ void	ft_process_expand(char **str, char **env)
 				else
 					str[i] = ft_expand(var, var_value, str[i]);
 				//printf("El argumento es =  %s\n", &str[i][j]);
-
-				while (str[i][j] && str[i][j] !=34 && str[i][j] != '$' && str[i][j] != 32 && str[i][j] != 39)
+				while (str[i][j] && str[i][j] != 34 && str[i][j] != '$' && str[i][j] != 32 && str[i][j] != 39)
 					j++;
 			}
 			else

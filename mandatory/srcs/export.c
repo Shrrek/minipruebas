@@ -13,83 +13,13 @@
 #include "../incs/minishell.h"
 
 
-void ft_print_nbrlst(int *nbr_lst, size_t lst_len)
-{
-	int i;
-
-	i = -1;
-	while (lst_len--)
-		printf("%d\n", nbr_lst[++i]);
-}
-
-// Comprueba si un numero esta en un array de numeros
-int ft_isin_intarr(int nbr, int *nbr_lst, size_t lst_len)
-{
-	while (lst_len--)
-	{
-		if (nbr == nbr_lst[lst_len])
-			return (1);
-	}
-	return (0);
-}
-int ft_get_smaller_stridx(const char **str, int *nbr_lst, size_t lst_len)
-{
-	int i;
-	int j;
-	int index;
-
-	index = 0;
-	// Setea index con el indice la primera cadena de la lista que no esta en la lista de numeros
-	while (ft_isin_intarr(index, nbr_lst, lst_len) == 1)
-		index++;
-	// Se iguala i con index para que empiece a comparar con la siguiente cadena
-	i = index;
-	while (str[++i] != NULL)
-	{
-		j = 0;
-		// Si el indice de la cadena que va a comparar ya esta en la lista de indices pasa al siguiente.
-		if (ft_isin_intarr(i, nbr_lst, lst_len) == 1)
-			continue;
-		while (str[index][j] == str[i][j])
-			j++;
-		if (str[index][j] > str[i][j])
-			index = i;
-	}
-	return (index);
-}
-/*
- *
- * Parámetros:
- * Return:
- */
-int *ft_get_2dstr_order(const char **str)
-{
-	int *pos_lst;
-
-	size_t len;
-
-
-	len = ft_2dstrlen(str);
-	pos_lst = (int *)malloc(sizeof(int) * (len));
-	if (!pos_lst)
-		return NULL;
-	int		lst_len;
-	lst_len = 0;
-	while (len--)
-	{
-		pos_lst[lst_len] = ft_get_smaller_stridx(str, pos_lst, lst_len);
-		lst_len++;
-	}
-	return pos_lst;
-	//ft_print_nbrlst(pos_lst, lst_len);
-}
 
 // Devuelve el indice de la cadena mas pequeña dentro de un array
 
-void ft_print2dstr_export(char **str)
+void	ft_print2dstr_export(char **str)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 	int	*pos_lst;
 
 	i = -1;
@@ -104,7 +34,6 @@ void ft_print2dstr_export(char **str)
 			{
 				printf("%c", str[pos_lst[i]][j]);
 				j++;
-
 			}
 			printf("%c", str[pos_lst[i]][j]);
 		}
@@ -134,7 +63,7 @@ char	**ft_create_newenv(char **env, char *new_var)
 {
 	char	**new_env;
 	size_t	env_len;
-	int	i;
+	int		i;
 
 	i = -1;
 	env_len = ft_2dstrlen((const char **)env) + 2;
@@ -149,10 +78,10 @@ char	**ft_create_newenv(char **env, char *new_var)
 	return (new_env);
 }
 
-int	ft_search_string(char *str1, char *str2, int n)
+/*int	ft_search_string(char *str1, char *str2, int n)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!str1 || !str2)
 		return (0);
@@ -163,7 +92,7 @@ int	ft_search_string(char *str1, char *str2, int n)
 		i++;
 	}
 	return (0);
-}
+}*/
 
 int	ft_export_var(t_mini *minishell, char **input_split, int j, int i)
 {
@@ -200,11 +129,11 @@ void	ft_export(t_mini *minishell)
 			while (minishell->mini_env[++j])
 			{
 				if (ft_export_var(minishell, input_split, j, i))
-					break ;				
+					break ;
 			}
 			if (minishell->mini_env[j] == NULL )
 				minishell->mini_env = ft_create_newenv(minishell->mini_env, minishell->next_line_split[i]);
-			 //ft_free_2dstr(input_split);
+			//ft_free_2dstr(input_split);
 		}		
 	}
 }
